@@ -9,6 +9,8 @@ public interface CalendarUserDao {
 
     public CalendarUser findUserByEmail(String email);
 
+    public void udpateUser(CalendarUser user); 
+    
     public List<CalendarUser> findUsersByEmail(String partialEmail);
 
     public int createUser(CalendarUser user);

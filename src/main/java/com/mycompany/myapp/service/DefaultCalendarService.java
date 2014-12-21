@@ -12,10 +12,12 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import com.mycompany.myapp.dao.CalendarUserDao;
 import com.mycompany.myapp.dao.EventAttendeeDao;
 import com.mycompany.myapp.dao.EventDao;
+import com.mycompany.myapp.dao.UserRoleDao;
 import com.mycompany.myapp.domain.CalendarUser;
 import com.mycompany.myapp.domain.Event;
 import com.mycompany.myapp.domain.EventAttendee;
 import com.mycompany.myapp.domain.EventLevel;
+import com.mycompany.myapp.domain.UserRole;
 
 
 @Service("calendarService")
@@ -31,6 +33,9 @@ public class DefaultCalendarService implements CalendarService {
 
 	@Autowired
 	private EventAttendeeDao eventAttendeeDao;
+	
+	@Autowired
+	private UserRoleDao userRoleDao;
 
 	public void setEventDao(EventDao eventDao) {
 		this.eventDao = eventDao;
@@ -62,6 +67,10 @@ public class DefaultCalendarService implements CalendarService {
 		userDao.deleteAll();
 	}
 
+	@Override
+	public void updateUser(CalendarUser user) {
+		userDao.udpateUser(user);
+	}
 
 
 	/* Event */
@@ -120,6 +129,10 @@ public class DefaultCalendarService implements CalendarService {
 		eventAttendeeDao.deleteAll();
 	}
 
+	@Override
+	public List<EventAttendee> getAllEventAttendee() {
+		return eventAttendeeDao.findAllEventAttendee();
+	}
 
 
 	/* upgradeEventLevels */
@@ -147,5 +160,24 @@ public class DefaultCalendarService implements CalendarService {
 	public void upgradeEventLevel(Event event) {
 		event.upgradeLevel();
 		eventDao.udpateEvent(event);
+	}
+
+	/* Role */
+	@Override
+	public void createRole(UserRole userRole) {
+		userRoleDao.add(userRole);
+	}
+
+	@Override
+	public void upgradeRole(UserRole userRole) {
+		// TODO Auto-generated method stub
+		userRoleDao.update(userRole);
+	}
+
+	@Override
+	public UserRole getRole(String userId) {
+		// TODO Auto-generated method stub
+		UserRole userRole = userRoleDao.get(userId);
+		return userRole;
 	}
 }

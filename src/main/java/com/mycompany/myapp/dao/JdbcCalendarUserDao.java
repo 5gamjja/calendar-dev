@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -98,5 +99,11 @@ public class JdbcCalendarUserDao implements CalendarUserDao {
 		// Assignment 2
 		String sql = "delete from calendar_users";
 		this.jdbcTemplate.update(sql);
+	}
+
+	@Override
+	public void udpateUser(CalendarUser user) {
+		String sql_query = "update calendar_users set `password` = ?, name = ? where id = ?";
+		this.jdbcTemplate.update(sql_query, new Object[] {user.getPassword(), user.getName(), user.getId()});	
 	}
 }

@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mycompany.myapp.domain.CalendarUser;
 import com.mycompany.myapp.domain.Event;
 import com.mycompany.myapp.domain.EventAttendee;
+import com.mycompany.myapp.domain.UserRole;
 
 public interface CalendarService {
 	/* CalendarUser */
@@ -19,6 +20,8 @@ public interface CalendarService {
     public int createUser(CalendarUser user);
     
     public void deleteAllUsers();
+    
+    public void updateUser(CalendarUser user);
     
     /* Event */
     public Event getEvent(int eventId);
@@ -42,10 +45,21 @@ public interface CalendarService {
     
     public void deleteAllEventAttendees();
     
+    public List<EventAttendee> getAllEventAttendee();
+    
 	/* upgradeEventLevels */
 	public void upgradeEventLevels() throws Exception;
 
 	public boolean canUpgradeEventLevel(Event event);
 	
 	public void upgradeEventLevel(Event event);
+	
+	/* User Role*/
+	public void createRole(UserRole userRole);
+	
+	public void upgradeRole(UserRole userRole);
+	
+	public UserRole getRole(String userId);
+	
+	
 }

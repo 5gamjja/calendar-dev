@@ -1,13 +1,20 @@
 package com.mycompany.myapp.web.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mycompany.myapp.domain.CalendarUser;
+import com.mycompany.myapp.domain.Event;
 import com.mycompany.myapp.service.CalendarService;
 
 /**
@@ -24,4 +31,5 @@ public class HomeController {
 		mav.setViewName("index");
 		return mav;
 	}
+	
 }

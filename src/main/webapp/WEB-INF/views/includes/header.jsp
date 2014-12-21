@@ -27,11 +27,28 @@
             <c:url var="createEventUrl" value="/events/form" />
             <li><a id="navCreateEventLink" href="${createEventUrl}"><span class="glyphicon glyphicon-new-window"></span> 이벤트 생성</a></li>
             
-            <c:url var="signupUrl" value="/users/signup" />
-            <li><a id="signupLink" href="${signupUrl}"><span class="glyphicon glyphicon-globe"></span> 회원 가입</a></li>
+            <sec:authorize access="hasRole('ROLE_ANONYMOUS')">
+            	<c:url var="signupUrl" value="/users/signup" />
+            	<li><a id="signupLink" href="${signupUrl}"><span class="glyphicon glyphicon-globe"></span> 회원 가입</a></li>
             
-            <c:url var="signinUrl" value="/users/signin" />
-            <li><a id="signinLink" href="${signinUrl}"><span class="glyphicon glyphicon-saved"></span> 로그인</a></li>
+            	<c:url var="signinUrl" value="/users/signin" />
+            	<li><a id="signinLink" href="${signinUrl}"><span class="glyphicon glyphicon-saved"></span> 로그인</a></li>
+        	</sec:authorize>
+        	
+        	<sec:authorize access="hasRole('ROLE_ADMIN')">
+            	<c:url var="logoutUrl" value="/users/info" />
+            	<li><a id="signupLink" href="${logoutUrl}"><span class="glyphicon glyphicon-globe"></span> 회원 정보</a></li>
+            </sec:authorize>
+        	
+        	<sec:authorize access="hasRole('ROLE_USER')">
+            	<c:url var="logoutUrl" value="/users/myinfo" />
+            	<li><a id="signupLink" href="${logoutUrl}"><span class="glyphicon glyphicon-info-sign"></span> 내 정보</a></li>
+            </sec:authorize>
+        	
+        	<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
+            	<c:url var="logoutUrl" value="/j_spring_security_logout" />
+            	<li><a id="signupLink" href="${logoutUrl}"><span class="glyphicon glyphicon-off"></span> 로그 아웃</a></li>
+            </sec:authorize>
         </ul>
     </div>
   </div>
